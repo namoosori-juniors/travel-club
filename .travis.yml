@@ -17,3 +17,22 @@ notifications:
   email:
     recipients:
       - mhjang@nextree.io
+
+before_deploy:
+  - zip -r travel-club *
+  - mkdir -p deploy
+  - mv travel-club.zip deploy/travel-club.zip
+
+deploy:
+  - provider: s3
+    local_dir: deploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: travel-club
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: public_read
+    wait-until-deployed: true
+    on:
+      repo: namoosori-juniors/travel-club
+      branch: master
