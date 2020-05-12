@@ -1,0 +1,45 @@
+plugins {
+    id 'io.spring.dependency-management' version '1.0.7.RELEASE'
+    id 'maven'
+}
+
+ext {
+    travelClubVersion = '1.0-SNAPSHOT'
+
+    springBootVersion = "2.1.5.RELEASE"
+    springBootGradlePluginVersion = "2.1.5.RELEASE"
+
+    swaggerVersion = "2.9.2"
+}
+
+allprojects {
+    group 'io.namoosori'
+    version travelClubVersion
+}
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0,'seconds'
+}
+
+subprojects {
+    apply plugin: 'java-library'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = '8'
+    targetCompatibility = '8'
+
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
+        }
+    }
+    dependencies {
+        compileOnly('org.projectlombok:lombok:1.18.6')
+        annotationProcessor('org.projectlombok:lombok:1.18.6')
+    }
+}
