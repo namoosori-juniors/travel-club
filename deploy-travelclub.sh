@@ -28,5 +28,5 @@ fi
 cd "$REPOSITORY"
 
 docker build -t "$APP_NAME" .
-docker-compose up
+docker-compose up -d
 
