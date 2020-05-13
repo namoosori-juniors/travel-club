@@ -12,7 +12,6 @@ if [ -z "$CURRENT_MONGO_PID" ]; then
 else
     echo "> kill $CURRENT_MONGO_PID"
     docker stop "$CURRENT_MONGO_PID"
-    sleep 5
 fi
 
 CURRENT_APP_PID=$(docker ps -aqf "name=$APP_NAME")
@@ -24,7 +23,6 @@ if [ -z "$CURRENT_APP_PID" ]; then
 else
     echo "> kill $CURRENT_APP_PID"
     docker stop "$CURRENT_APP_PID"
-    sleep 5
 fi
 
 cd "$REPOSITORY"
