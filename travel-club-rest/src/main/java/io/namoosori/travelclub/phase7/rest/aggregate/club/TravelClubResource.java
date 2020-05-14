@@ -6,6 +6,7 @@ import io.namoosori.travelclub.phase7.spec.facade.aggregate.NameValueList;
 import io.namoosori.travelclub.phase7.spec.facade.aggregate.TravelClubFacade;
 import io.namoosori.travelclub.phase7.spec.facade.aggregate.club.sdo.TravelClubCdo;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/clubs")
 public class TravelClubResource implements TravelClubFacade {
