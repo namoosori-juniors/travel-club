@@ -14,7 +14,7 @@ services:
   app:
     image: travel-club-boot
     ports:
-      - 80:9001
+      - 9001:9001
     links:
       - mongodb
     container_name: "travel-club-app"

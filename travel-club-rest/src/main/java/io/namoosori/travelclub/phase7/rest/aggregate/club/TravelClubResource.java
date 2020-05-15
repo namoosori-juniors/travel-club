@@ -38,7 +38,6 @@ public class TravelClubResource implements TravelClubFacade {
         return clubId;
     }
 
-    @Cacheable(key = "#clubId", value = "clubById")
     @GetMapping("/{clubId}")
     @Override
     public TravelClub findTravelClubById(@PathVariable String clubId) {
