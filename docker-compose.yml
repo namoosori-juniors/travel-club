@@ -11,6 +11,8 @@ services:
     container_name: "mongodb"
     ports:
       - 27017:27017
+    networks:
+      - travel-club-app
   app:
     image: travel-club-boot
     ports:
