@@ -19,6 +19,9 @@ services:
       - mongodb
     container_name: "travel-club-app"
     networks:
-      travel-club-app:
-        external: true
+      - travel-club-app
+
+networks:
+  travel-club-app:
+    external: true
 
