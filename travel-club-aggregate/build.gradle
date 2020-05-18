@@ -4,7 +4,6 @@ dependencies {
     api project(':travel-club-spec')
     implementation('javax.transaction:javax.transaction-api:1.3')
     implementation('org.springframework.boot:spring-boot-starter-web')
-    implementation('org.springframework.boot:spring-boot-starter-data-redis')
     implementation('org.springframework.boot:spring-boot-starter-data-mongodb')
 }
 
