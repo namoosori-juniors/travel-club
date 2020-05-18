@@ -14,7 +14,7 @@ services:
     networks:
       - travel-club-app
   app:
-    image: travel-club-boot
+    image: travel-club-app
     ports:
       - 9001:9001
     links:
