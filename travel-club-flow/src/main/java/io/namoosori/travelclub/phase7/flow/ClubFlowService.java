@@ -35,9 +35,9 @@ public class ClubFlowService implements ClubFlow {
         String clubId = getClubId(clubUsid);
 
         String memberEmail = travelClubCdo.getPresidentEmail();
-        String memberId = getMemberId(memberEmail);
+//        String memberId = getMemberId(memberEmail);
 
-        MembershipCdo membershipCdo = new MembershipCdo(clubId, memberId, RoleInClub.President);
+        MembershipCdo membershipCdo = new MembershipCdo(clubId, memberEmail, RoleInClub.President); // TODO memberEmail
         String membershipId = membershipService.registerMembership(membershipCdo);
 
         return membershipId;
