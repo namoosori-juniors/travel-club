@@ -17,7 +17,7 @@ notifications:
       - mhjang@nextree.io
 
 install:
-  - ./gradlew clean build
+  - sudo ./gradlew clean build
 
 deploy:
   - provider: codedeploy
