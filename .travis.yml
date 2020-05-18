@@ -11,12 +11,13 @@ cache:
     - '/tmp/.m2/repository'
     - '/tmp/.gradle'
 
-script: "./gradlew clean build"
-
 notifications:
   email:
     recipients:
       - mhjang@nextree.io
+
+install:
+  - ./gradlew clean build
 
 deploy:
   - provider: codedeploy
