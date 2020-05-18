@@ -5,13 +5,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 public class TravelClubCdo {
-    //
+
     private String name;
     private String intro;
     private String presidentEmail;
+
 }

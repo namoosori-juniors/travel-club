@@ -6,18 +6,18 @@ import com.google.gson.reflect.TypeToken;
 import java.util.List;
 
 public class JsonUtil {
-    //
     private static Gson gson = new Gson();
 
-    public static String toJson(Object object) {
-        return gson.toJson(object);
+    public static String toJson(Object obj){
+        String json = gson.toJson(obj);
+        return json;
     }
 
-    public static<T> T fromJson(String json, Class<T> classOfT) {
+    public static<T> T fromJson(String json, Class<T> classOfT){
         return gson.fromJson(json, classOfT);
     }
 
-    public static <T> List<T> fromJsonList(String json, Class<T> classOfT) {
-        return gson.fromJson(json, new TypeToken<List<T>>(){}.getType());
+    public static<T> List<T> fromJsonList(String json,Class<T> classOfT){
+        return gson.fromJson(json,new TypeToken<List<T>>(){}.getType());
     }
 }

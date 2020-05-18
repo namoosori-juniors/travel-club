@@ -1,8 +1,8 @@
-package io.namoosori.travelclub.phase7.aggregate.club.store.mongostore;
+package io.namoosori.travelclub.phase7.aggregate.club.store.mongodbStore;
 
 import io.namoosori.travelclub.phase7.aggregate.club.store.ClubStore;
-import io.namoosori.travelclub.phase7.aggregate.club.store.mongostore.jpo.TravelClubJpo;
-import io.namoosori.travelclub.phase7.aggregate.club.store.mongostore.repository.TravelClubRepository;
+import io.namoosori.travelclub.phase7.aggregate.club.store.mongodbStore.jpo.TravelClubJpo;
+import io.namoosori.travelclub.phase7.aggregate.club.store.mongodbStore.repository.TravelClubRepository;
 import io.namoosori.travelclub.phase7.spec.aggregate.club.TravelClub;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
@@ -12,11 +12,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
-public class ClubMongoStore implements ClubStore {
+public class TravelClubMongoStore implements ClubStore {
 
     private TravelClubRepository travelClubRepository;
 
-    public ClubMongoStore(TravelClubRepository travelClubRepository) {
+    public TravelClubMongoStore(TravelClubRepository travelClubRepository) {
+        //
         this.travelClubRepository = travelClubRepository;
     }
 
@@ -35,18 +36,25 @@ public class ClubMongoStore implements ClubStore {
     }
 
     @Override
-    public List<TravelClub> retrieveByName(String nameLike, boolean foundationTimeDescending) {
+    public TravelClub retrieveByUsid(String clubUsid) {
+        //
+        Optional<TravelClubJpo> travelClubJpo = travelClubRepository.findByUsid(clubUsid);
+        return travelClubJpo.map(TravelClubJpo::toDomain).orElse(null);
+    }
+
+    @Override
+    public List<TravelClub> retrieveByName(String name, boolean foundationTimeDescending) {
         //
         Sort sort = Sort.by("foundationTime");
         sort = foundationTimeDescending ? sort.descending() : sort.ascending();
 
-        if (nameLike == null) {
-            nameLike = "";
+        if (name == null) {
+            name = "*";
         }
 
-        return travelClubRepository.findAllByNameContaining(nameLike, sort)
-                .stream().map(TravelClubJpo::toDomain)
-                .collect(Collectors.toList());
+        List<TravelClubJpo> travelClubJpos = travelClubRepository.findByNameContaining(name, sort);
+
+        return travelClubJpos.stream().map(TravelClubJpo::toDomain).collect(Collectors.toList());
     }
 
     @Override
@@ -58,11 +66,12 @@ public class ClubMongoStore implements ClubStore {
     @Override
     public void delete(String clubId) {
         //
-
+        travelClubRepository.deleteById(clubId);
     }
 
     @Override
     public boolean exists(String clubId) {
-        return false;
+        //
+        return travelClubRepository.existsById(clubId);
     }
 }

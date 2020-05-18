@@ -1,6 +1,20 @@
 package io.namoosori.travelclub.phase7.spec.aggregate;
 
-public interface Entity {
+import java.util.UUID;
+
+public abstract class Entity {
 	//
-	public String getId();
+	protected String id;
+
+	protected Entity() {
+		this.id = UUID.randomUUID().toString();
+	}
+
+	protected Entity(String id) {
+		this.id = id;
+	}
+
+	public String getId() {
+		return id;
+	}
 }

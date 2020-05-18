@@ -5,58 +5,63 @@ import io.namoosori.travelclub.phase7.spec.aggregate.club.TravelClub;
 import io.namoosori.travelclub.phase7.spec.facade.aggregate.NameValueList;
 import io.namoosori.travelclub.phase7.spec.facade.aggregate.TravelClubFacade;
 import io.namoosori.travelclub.phase7.spec.facade.aggregate.club.sdo.TravelClubCdo;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import io.namoosori.travelclub.phase7.spec.flow.ClubFlow;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/clubs")
 public class TravelClubResource implements TravelClubFacade {
-
+    //
+    private ClubFlow clubFlowService;
     private ClubService clubService;
 
-    public TravelClubResource(ClubService clubService) {
+    public TravelClubResource(ClubFlow clubFlowService, ClubService clubService) {
         //
+        this.clubFlowService = clubFlowService;
         this.clubService = clubService;
     }
 
+//    @CacheEvict(key = "#travelClubCdo")
     @PostMapping
     @Override
     public String registerTravelClub(@RequestBody TravelClubCdo travelClubCdo) {
-        //
-        String clubId = clubService.registerClub(travelClubCdo);
+        //\
+        String clubId = clubFlowService.registerTravelClub(travelClubCdo);
+
         return clubId;
     }
 
-    @GetMapping("/{clubId}")
+    @GetMapping("/{clubUsid}")
     @Override
-    public TravelClub findTravelClubById(@PathVariable String clubId) {
+    public TravelClub findTravelClubById(@PathVariable String clubUsid) {
         //
-        TravelClub club = clubService.findClub(clubId);
-        return club;
+        TravelClub travelClub = clubService.findClubByUsid(clubUsid);
+        return travelClub;
     }
 
+//    @Cacheable(key = "#name", value = "clubsFound")
     @GetMapping
     @Override
-    public List<TravelClub> findTravelClubsByName(@RequestParam(required = false) String clubName, @RequestParam(required = false, defaultValue = "true") boolean descending) {
+    public List<TravelClub> findTravelClubsByName(@RequestParam(required = false) String name, @RequestParam(required = false, defaultValue = "true") boolean foundationTimeDescending) {
         //
-        return clubService.findClubsByName(clubName, descending);
+        List<TravelClub> travelClubs = clubService.findClubsByName(name, foundationTimeDescending);
+        return travelClubs;
     }
 
     @PutMapping("/{clubId}")
     @Override
-    public void modifyTravelClub(@PathVariable String clubId, @RequestBody NameValueList nameValues) {
+    public void modifyTravelClub(@PathVariable String clubId, @RequestBody NameValueList nameValueList) {
         //
-        clubService.modify(clubId, nameValues);
+        clubService.modify(clubId, nameValueList);
     }
+
+    @DeleteMapping("/{clubId}")
+    @Override
+    public void removeTravelClub(@PathVariable String clubId) {
+        //
+        clubService.remove(clubId);
+    }
+
 }

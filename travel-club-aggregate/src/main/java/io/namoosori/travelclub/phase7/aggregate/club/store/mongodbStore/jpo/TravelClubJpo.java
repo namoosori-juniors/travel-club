@@ -1,6 +1,5 @@
-package io.namoosori.travelclub.phase7.aggregate.club.store.mongostore.jpo;
+package io.namoosori.travelclub.phase7.aggregate.club.store.mongodbStore.jpo;
 
-import io.namoosori.travelclub.phase7.spec.aggregate.club.ClubMembership;
 import io.namoosori.travelclub.phase7.spec.aggregate.club.TravelClub;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,22 +9,20 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serializable;
-import java.util.List;
 
-
-@Document(collection = "club")
+@Document("clubs")
 @Getter
 @Setter
 @NoArgsConstructor
 public class TravelClubJpo implements Serializable {
-    //
+
     @Id
+    private String id;
     private String usid;
     private String name;
     private String intro;
     private long foundationTime;
     private String boardId;
-    private List<ClubMembership> membershipList;
 
     public TravelClubJpo(TravelClub travelClub) {
         //
@@ -34,10 +31,13 @@ public class TravelClubJpo implements Serializable {
 
     public TravelClub toDomain() {
         //
-        TravelClub travelClub = new TravelClub(usid, name, intro);
-        travelClub.setBoardId(boardId);
+        TravelClub travelClub = new TravelClub(id);
+        travelClub.setUsid(usid);
+        travelClub.setName(name);
+        travelClub.setIntro(intro);
         travelClub.setFoundationTime(foundationTime);
-        travelClub.setMembershipList(membershipList);
+        travelClub.setBoardId(boardId);
+
         return travelClub;
     }
 }
