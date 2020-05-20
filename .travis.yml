@@ -16,7 +16,9 @@ notifications:
     recipients:
       - mhjang@nextree.io
 
-script: "sudo ./gradlew clean build --stacktrace"
+script:
+  - ./gradlew test
+  - ./gradlew clean build
 
 deploy:
   - provider: codedeploy

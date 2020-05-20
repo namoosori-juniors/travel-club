@@ -7,7 +7,6 @@ services:
       - MONGO_LOG_DIR=/dev/null
     volumes:
       - /data/db:/data/db
-#      - ./initdb/:/docker-entrypoint-initdb.d/
     container_name: "mongodb"
     ports:
       - 27017:27017
