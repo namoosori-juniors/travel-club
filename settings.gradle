@@ -1,5 +1,2 @@
 rootProject.name = 'travel-club-phase7'
-include 'travel-club-spec'
-include 'travel-club-aggregate'
 include 'travel-club-boot'
-include 'travel-club-rest'

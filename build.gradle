@@ -6,9 +6,6 @@ plugins {
 ext {
     travelClubVersion = '1.0-SNAPSHOT'
 
-    springBootVersion = "2.1.5.RELEASE"
-    springBootGradlePluginVersion = "2.1.5.RELEASE"
-
     swaggerVersion = "2.9.2"
 }
 
@@ -33,11 +30,6 @@ subprojects {
         jcenter()
     }
 
-    dependencyManagement {
-        imports {
-            mavenBom "org.springframework.boot:spring-boot-dependencies:${springBootVersion}"
-        }
-    }
     dependencies {
         compileOnly('org.projectlombok:lombok:1.18.6')
         annotationProcessor('org.projectlombok:lombok:1.18.6')
