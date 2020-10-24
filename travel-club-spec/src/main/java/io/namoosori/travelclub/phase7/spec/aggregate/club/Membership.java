@@ -1,6 +1,9 @@
 package io.namoosori.travelclub.phase7.spec.aggregate.club;
 
 import io.namoosori.travelclub.phase7.spec.aggregate.Entity;
+import io.namoosori.travelclub.phase7.spec.aggregate.club.vo.RoleInClub;
+import io.namoosori.travelclub.phase7.spec.facade.shared.NameValue;
+import io.namoosori.travelclub.phase7.spec.facade.shared.NameValueList;
 import io.namoosori.travelclub.phase7.spec.util.helper.DateUtil;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +20,7 @@ public class Membership extends Entity {
 	private String joinDate;
 
 	public Membership(String id) {
+		//
 		super(id);
 	}
 
@@ -24,7 +28,6 @@ public class Membership extends Entity {
 		//
 		this.clubId = clubId; 
 		this.memberId = memberId;
-		
 		this.role = RoleInClub.Member; 
 		this.joinDate = DateUtil.today();
 	}
@@ -42,16 +45,28 @@ public class Membership extends Entity {
 		return builder.toString();
 	}
 
-	public static Membership getSample(TravelClub club, CommunityMember member) {
-		// 
-		Membership membership = new Membership(club.getId(), member.getEmail());
-		membership.setRole(RoleInClub.Member);
-		
-		return membership; 
+	public static Membership sample() {
+		//
+		return new Membership(
+				TravelClub.sample().getId(),
+				CommunityMember.sample().getId()
+		);
+	}
+
+	public void modifyValues(NameValueList nameValueList) {
+		//
+		for (NameValue nameValue : nameValueList.getNameValues()) {
+			String value = nameValue.getValue();
+			switch (nameValue.getName()) {
+				case "role":
+					this.role = RoleInClub.valueOf(value);
+					break;
+			}
+		}
 	}
 
 	public static void main(String[] args) {
 		// 
-		System.out.println(Membership.getSample(TravelClub.getSample(), CommunityMember.getSample()));
+		System.out.println(sample().toString());
 	}
 }

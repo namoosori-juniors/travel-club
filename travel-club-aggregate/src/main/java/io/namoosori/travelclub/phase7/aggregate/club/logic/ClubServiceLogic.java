@@ -2,15 +2,14 @@ package io.namoosori.travelclub.phase7.aggregate.club.logic;
 
 import io.namoosori.travelclub.phase7.aggregate.club.service.ClubService;
 import io.namoosori.travelclub.phase7.aggregate.club.store.ClubStore;
-import io.namoosori.travelclub.phase7.aggregate.member.store.IdSequenceStore;
+import io.namoosori.travelclub.phase7.aggregate.sequence.IdSequenceStore;
 import io.namoosori.travelclub.phase7.spec.aggregate.club.TravelClub;
-import io.namoosori.travelclub.phase7.spec.facade.aggregate.NameValueList;
+import io.namoosori.travelclub.phase7.spec.facade.shared.NameValueList;
 import io.namoosori.travelclub.phase7.spec.facade.aggregate.club.sdo.TravelClubCdo;
 import io.namoosori.travelclub.phase7.spec.util.exception.NoSuchClubException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ClubServiceLogic implements ClubService {
@@ -38,22 +37,19 @@ public class ClubServiceLogic implements ClubService {
 	@Override
 	public TravelClub findClubById(String clubId) {
 		//
-		return Optional.ofNullable(clubStore.retrieve(clubId))
-				.orElseThrow(()-> new NoSuchClubException("No such a club with id: " + clubId));
+		return clubStore.retrieve(clubId);
 	}
 
 	@Override
 	public TravelClub findClubByUsid(String clubUsid) {
 		//
-		return Optional.ofNullable(clubStore.retrieveByUsid(clubUsid))
-				.orElseThrow(()-> new NoSuchClubException("No such a club with usid: " + clubUsid));
+		return clubStore.retrieveByUsid(clubUsid);
 	}
 
 	@Override
 	public List<TravelClub> findClubsByName(String name, boolean foundationTimeDescending) {
 		//
-		return Optional.ofNullable(clubStore.retrieveByName(name, foundationTimeDescending))
-				.orElseThrow(()-> new NoSuchClubException("No such a club with name: " + name));
+		return clubStore.retrieveByName(name, foundationTimeDescending);
 	}
 
 	@Override
@@ -69,7 +65,7 @@ public class ClubServiceLogic implements ClubService {
 	public void remove(String clubId) {
 		//
 		if (!clubStore.exists(clubId)) {
-			throw new NoSuchClubException("No such a club with id: " + clubId);
+			throw new NoSuchClubException("No such club with id: " + clubId);
 		}
 
 		clubStore.delete(clubId);

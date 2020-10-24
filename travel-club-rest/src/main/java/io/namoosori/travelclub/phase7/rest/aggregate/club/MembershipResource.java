@@ -1,10 +1,9 @@
 package io.namoosori.travelclub.phase7.rest.aggregate.club;
 
-import io.namoosori.travelclub.phase7.aggregate.club.service.MembershipService;
+import io.namoosori.travelclub.phase7.aggregate.membership.service.MembershipService;
 import io.namoosori.travelclub.phase7.spec.aggregate.club.Membership;
-import io.namoosori.travelclub.phase7.spec.facade.aggregate.MembershipFacade;
-import io.namoosori.travelclub.phase7.spec.facade.aggregate.club.sdo.MembershipCdo;
-import io.namoosori.travelclub.phase7.spec.flow.ClubFlow;
+import io.namoosori.travelclub.phase7.spec.facade.aggregate.club.facade.MembershipFacade;
+import io.namoosori.travelclub.phase7.spec.facade.shared.NameValueList;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,52 +12,39 @@ import java.util.List;
 @RequestMapping("/membership")
 public class MembershipResource implements MembershipFacade {
     //
-    private ClubFlow clubFlowService;
     private MembershipService membershipService;
 
-    public MembershipResource(ClubFlow clubFlowService, MembershipService membershipService) {
+    public MembershipResource(MembershipService membershipService) {
         //
-        this.clubFlowService = clubFlowService;
         this.membershipService = membershipService;
-    }
-
-    @PostMapping
-    @Override
-    public String registerMembership(@RequestBody MembershipCdo membershipCdo) {
-        //
-        String membershipId = clubFlowService.registerMembership(membershipCdo);
-        return membershipId;
     }
 
     @GetMapping
     @Override
     public Membership findMembershipIn(@RequestParam String clubId, @RequestParam String memberId) {
         //
-        Membership membership = clubFlowService.findMembershipIn(clubId, memberId);
-        return membership;
+        return membershipService.findMembershipIn(clubId, memberId);
     }
 
     @GetMapping("/club")
     @Override
     public List<Membership> findAllMembershipsOfClub(@RequestParam String clubId) {
         //
-        List<Membership> membershipList = clubFlowService.findAllMembershipsOfClub(clubId);
-        return membershipList;
+        return membershipService.findAllMembershipsOfClub(clubId);
     }
 
     @GetMapping("/member")
     @Override
     public List<Membership> findAllMembershipsOfMember(@RequestParam String memberId) {
         //
-        List<Membership> membershipList = clubFlowService.findAllMembershipsOfMember(memberId);
-        return membershipList;
+        return membershipService.findAllMembershipsOfMember(memberId);
     }
 
     @PutMapping
     @Override
-    public void modifyMembership(@RequestBody MembershipCdo membershipCdo) {
+    public void modifyMembership(@RequestParam String clubId, @RequestParam String memberId, @RequestBody NameValueList nameValueList) {
         //
-        membershipService.modifyMembership(membershipCdo);
+        membershipService.modifyMembership(clubId, memberId, nameValueList);
     }
 
     @DeleteMapping

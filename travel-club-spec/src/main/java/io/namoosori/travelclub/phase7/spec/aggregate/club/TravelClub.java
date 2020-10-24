@@ -1,8 +1,8 @@
 package io.namoosori.travelclub.phase7.spec.aggregate.club;
 
 import io.namoosori.travelclub.phase7.spec.aggregate.Entity;
-import io.namoosori.travelclub.phase7.spec.facade.aggregate.NameValue;
-import io.namoosori.travelclub.phase7.spec.facade.aggregate.NameValueList;
+import io.namoosori.travelclub.phase7.spec.facade.shared.NameValue;
+import io.namoosori.travelclub.phase7.spec.facade.shared.NameValueList;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,8 +12,8 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TravelClub extends Entity {
 	//
-	private static final int MINIMUM_NAME_LENGTH =  3;
-	private static final int MINIMUM_INTRO_LENGTH =  10;
+	public static final int MINIMUM_NAME_LENGTH =  3;
+	public static final int MINIMUM_INTRO_LENGTH =  10;
 
 	private String usid; 		// auto incremental style
 	private String name;
@@ -49,41 +49,31 @@ public class TravelClub extends Entity {
 		return builder.toString(); 
 	}
 	
-	public static TravelClub getSample() {
+	public static TravelClub sample() {
 		// 
 		String name = "JavaTravelClub";
 		String intro = "Travel club to the Java island.";
-		TravelClub club = new TravelClub("sample_id", name, intro);
 
-		return club; 
-	}
-
-	public void validateName(String name) {
-		//
-		if (name.length() < MINIMUM_NAME_LENGTH) {
-			//
-			throw new IllegalArgumentException("Name should be longer than " + MINIMUM_NAME_LENGTH);
-		}
-	}
-
-	public void validateIntro(String intro) {
-		//
-		if (intro.length() < MINIMUM_INTRO_LENGTH) {
-			//
-			throw new IllegalArgumentException("Intro should be longer than " + MINIMUM_INTRO_LENGTH);
-		}
+		return new TravelClub("00001", name, intro);
 	}
 
 	public void modifyValues(NameValueList nameValues) {
 		//
-		for (NameValue nameValue : nameValues.getNameValueList()) {
+		for (NameValue nameValue : nameValues.getNameValues()) {
 			String value = nameValue.getValue();
 			switch (nameValue.getName()) {
 				case "name":
-					this.name = value; break;
+					this.name = value;
+					break;
 				case "intro":
-					this.intro = value; break;
+					this.intro = value;
+					break;
 			}
 		}
+	}
+
+	public static void main(String[] args) {
+		//
+		System.out.println(sample().toString());
 	}
 }

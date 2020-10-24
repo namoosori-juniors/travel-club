@@ -2,15 +2,15 @@ package io.namoosori.travelclub.phase7.rest.aggregate.club;
 
 import io.namoosori.travelclub.phase7.aggregate.member.service.MemberService;
 import io.namoosori.travelclub.phase7.spec.aggregate.club.CommunityMember;
-import io.namoosori.travelclub.phase7.spec.facade.aggregate.MemberFacade;
-import io.namoosori.travelclub.phase7.spec.facade.aggregate.NameValueList;
+import io.namoosori.travelclub.phase7.spec.facade.aggregate.club.facade.MemberFacade;
+import io.namoosori.travelclub.phase7.spec.facade.shared.NameValueList;
 import io.namoosori.travelclub.phase7.spec.facade.aggregate.club.sdo.MemberCdo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/members")
+@RequestMapping("/member")
 public class MemberResource implements MemberFacade {
 
     private MemberService memberService;
@@ -24,24 +24,22 @@ public class MemberResource implements MemberFacade {
     @Override
     public String registerMember(@RequestBody MemberCdo memberCdo) {
         //
-        String memberId = memberService.registerMember(memberCdo);
-        return memberId;
+        return memberService.registerMember(memberCdo);
     }
 
     @GetMapping("/{memberEmail}")
     @Override
     public CommunityMember findMemberById(@PathVariable String memberEmail) {
         //
-        CommunityMember member = memberService.findMemberByEmail(memberEmail);
-        return member;
+        return memberService.findMemberByEmail(memberEmail);
     }
 
     @GetMapping
     @Override
-    public List<CommunityMember> findMembersByName(@RequestParam(required = false) String name, @RequestParam(required = false, defaultValue = "true") boolean nameDescending) {
+    public List<CommunityMember> findMembersByName(@RequestParam(required = false) String name,
+                                                   @RequestParam(required = false, defaultValue = "false") boolean descending) {
         //
-        List<CommunityMember> members = memberService.findMembersByName(name, nameDescending);
-        return members;
+        return memberService.findMembersByName(name, descending);
     }
 
     @PutMapping("/{memberId}")
@@ -56,6 +54,5 @@ public class MemberResource implements MemberFacade {
     public void removeMember(@PathVariable String memberId) {
         //
         memberService.removeMember(memberId);
-
     }
 }

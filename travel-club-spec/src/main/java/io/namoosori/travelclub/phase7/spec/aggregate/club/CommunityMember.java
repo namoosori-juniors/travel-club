@@ -1,17 +1,17 @@
 package io.namoosori.travelclub.phase7.spec.aggregate.club;
 
 import io.namoosori.travelclub.phase7.spec.aggregate.Entity;
-import io.namoosori.travelclub.phase7.spec.facade.aggregate.NameValue;
-import io.namoosori.travelclub.phase7.spec.facade.aggregate.NameValueList;
-import io.namoosori.travelclub.phase7.spec.util.exception.InvalidEmailException;
+import io.namoosori.travelclub.phase7.spec.aggregate.club.vo.Address;
+import io.namoosori.travelclub.phase7.spec.facade.shared.NameValue;
+import io.namoosori.travelclub.phase7.spec.facade.shared.NameValueList;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Setter
 @Getter
+@Setter
 public class CommunityMember extends Entity {
 	//
 	private String email;		// key
@@ -29,6 +29,7 @@ public class CommunityMember extends Entity {
 	}
 
 	public CommunityMember(String id) {
+		//
 		super(id);
 	}
 	
@@ -53,41 +54,23 @@ public class CommunityMember extends Entity {
 
 		if (addresses != null) {
 			int i = 1; 
-			for(Address address : addresses) {
-				builder.append(", Address[" + i + "]").append(address.toString()); 
+			for (Address address : addresses) {
+				builder.append(", Address[").append(i).append("]").append(address.toString());
 			}
 		}
 		
 		return builder.toString(); 
 	}
 	
-	public static CommunityMember getSample() {
+	public static CommunityMember sample() {
 		// 
-		CommunityMember member = null;
-		try {
-			member = new CommunityMember("mymy@nextree.co.kr", "Minsoo Lee", "010-3321-1001");
-			member.setBirthDay("2001.09.23");
-			member.getAddresses().add(Address.getHomeAddressSample());
-		} catch (InvalidEmailException e) {
-			System.out.println(e.getMessage());
-		}
+		CommunityMember member = new CommunityMember("mymy@nextree.co.kr", "Minsoo Lee", "010-3321-1001");
+		member.setBirthDay("2001.09.23");
+		member.getAddresses().add(Address.sampleHomeAddress());
 		return member; 
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) throws InvalidEmailException {
-		//
-		if (!this.isValidEmailAddress(email)) {
-			throw new InvalidEmailException("Email is not valid. --> " + email);
-		}
-		
-		this.email = email;
-	}
-
-    public boolean isValidEmailAddress(String email) {
+    public static boolean validateEmail(String email) {
     	//
         String ePattern = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
         java.util.regex.Pattern p = java.util.regex.Pattern.compile(ePattern);
@@ -97,7 +80,7 @@ public class CommunityMember extends Entity {
 
 	public void modifyValues(NameValueList nameValues) {
 		//
-		for (NameValue nameValue : nameValues.getNameValueList()) {
+		for (NameValue nameValue : nameValues.getNameValues()) {
 			String value = nameValue.getValue();
 			switch (nameValue.getName()) {
 				case "name":
@@ -114,5 +97,10 @@ public class CommunityMember extends Entity {
 					break;
 			}
 		}
+	}
+
+	public static void main(String[] args) {
+		//
+		System.out.println(sample().toString());
 	}
 }

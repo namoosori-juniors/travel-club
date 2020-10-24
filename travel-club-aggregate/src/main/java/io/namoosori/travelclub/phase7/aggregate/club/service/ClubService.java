@@ -1,7 +1,7 @@
 package io.namoosori.travelclub.phase7.aggregate.club.service;
 
 import io.namoosori.travelclub.phase7.spec.aggregate.club.TravelClub;
-import io.namoosori.travelclub.phase7.spec.facade.aggregate.NameValueList;
+import io.namoosori.travelclub.phase7.spec.facade.shared.NameValueList;
 import io.namoosori.travelclub.phase7.spec.facade.aggregate.club.sdo.TravelClubCdo;
 
 import java.util.List;

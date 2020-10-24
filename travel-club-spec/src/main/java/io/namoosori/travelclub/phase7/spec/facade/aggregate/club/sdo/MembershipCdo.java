@@ -1,6 +1,6 @@
 package io.namoosori.travelclub.phase7.spec.facade.aggregate.club.sdo;
 
-import io.namoosori.travelclub.phase7.spec.aggregate.club.RoleInClub;
+import io.namoosori.travelclub.phase7.spec.aggregate.club.vo.RoleInClub;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

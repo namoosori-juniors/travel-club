@@ -1,16 +1,12 @@
 package io.namoosori.travelclub.phase7.spec.util.helper;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DateUtil {
 	//
-	public static String today(String format) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd");
-		return dateFormat.format((Calendar.getInstance()).getTime());
-	}
-	
 	public static String today() {
-		return today("yyyy.MM.dd"); 
+		//
+		return LocalDate.now().format(DateTimeFormatter.ISO_LOCAL_DATE);
 	}
 }
