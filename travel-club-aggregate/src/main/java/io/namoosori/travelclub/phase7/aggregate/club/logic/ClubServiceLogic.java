@@ -2,14 +2,21 @@ package io.namoosori.travelclub.phase7.aggregate.club.logic;
 
 import io.namoosori.travelclub.phase7.aggregate.club.service.ClubService;
 import io.namoosori.travelclub.phase7.aggregate.club.store.ClubStore;
+import io.namoosori.travelclub.phase7.aggregate.member.store.MemberStore;
 import io.namoosori.travelclub.phase7.aggregate.sequence.IdSequenceStore;
+import io.namoosori.travelclub.phase7.spec.aggregate.club.CommunityMember;
 import io.namoosori.travelclub.phase7.spec.aggregate.club.TravelClub;
+import io.namoosori.travelclub.phase7.spec.aggregate.club.vo.RoleInClub;
+import io.namoosori.travelclub.phase7.spec.facade.aggregate.club.sdo.MembershipCdo;
 import io.namoosori.travelclub.phase7.spec.facade.shared.NameValueList;
 import io.namoosori.travelclub.phase7.spec.facade.aggregate.club.sdo.TravelClubCdo;
+import io.namoosori.travelclub.phase7.spec.util.exception.ClubDuplicationException;
 import io.namoosori.travelclub.phase7.spec.util.exception.NoSuchClubException;
+import io.namoosori.travelclub.phase7.spec.util.exception.NoSuchMemberException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClubServiceLogic implements ClubService {
@@ -26,7 +33,10 @@ public class ClubServiceLogic implements ClubService {
 	@Override
 	public String registerClub(TravelClubCdo clubCdo) {
 		//
-		String sequence = idSequenceStore.increaseAndGet(TravelClub.class.getSimpleName());
+		clubCdo.checkValidation();
+
+		String className = TravelClub.class.getSimpleName();
+		String sequence = idSequenceStore.increaseAndGet(className);
 
 		TravelClub club = new TravelClub(sequence, clubCdo.getName(), clubCdo.getIntro());
 		String clubId = clubStore.create(club);

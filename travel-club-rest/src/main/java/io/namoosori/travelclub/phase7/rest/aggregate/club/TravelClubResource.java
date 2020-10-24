@@ -4,7 +4,6 @@ import io.namoosori.travelclub.phase7.aggregate.club.service.ClubService;
 import io.namoosori.travelclub.phase7.spec.aggregate.club.TravelClub;
 import io.namoosori.travelclub.phase7.spec.facade.shared.NameValueList;
 import io.namoosori.travelclub.phase7.spec.facade.aggregate.club.facade.TravelClubFacade;
-import io.namoosori.travelclub.phase7.flow.service.ClubFlowService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,12 +12,10 @@ import java.util.List;
 @RequestMapping("/club")
 public class TravelClubResource implements TravelClubFacade {
     //
-    private ClubFlowService clubFlowService;
     private ClubService clubService;
 
-    public TravelClubResource(ClubFlowService clubFlowService, ClubService clubService) {
+    public TravelClubResource(ClubService clubService) {
         //
-        this.clubFlowService = clubFlowService;
         this.clubService = clubService;
     }
 

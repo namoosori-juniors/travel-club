@@ -3,5 +3,3 @@ include 'travel-club-spec'
 include 'travel-club-aggregate'
 include 'travel-club-boot'
 include 'travel-club-rest'
-include 'travel-club-flow'
-
