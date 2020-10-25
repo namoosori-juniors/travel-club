@@ -19,8 +19,6 @@ public class TravelClub extends Entity {
 	private String name;
 	private String intro;
 	private long foundationTime;
-	
-	private String boardId;
 
 	public TravelClub(String id) {
 		//
