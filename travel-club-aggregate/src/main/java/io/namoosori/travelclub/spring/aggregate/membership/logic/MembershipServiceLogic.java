@@ -13,6 +13,7 @@ import io.namoosori.travelclub.spring.spec.facade.shared.NameValueList;
 import io.namoosori.travelclub.spring.spec.util.exception.MembershipDuplicationException;
 import io.namoosori.travelclub.spring.spec.util.exception.NoSuchClubException;
 import io.namoosori.travelclub.spring.spec.util.exception.NoSuchMemberException;
+import io.namoosori.travelclub.spring.spec.util.exception.NoSuchMembershipException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -107,6 +108,11 @@ public class MembershipServiceLogic implements MembershipService {
     public void modifyMembership(String membershipId, NameValueList nameValueList) {
         //
         Membership membership = membershipStore.retrieve(membershipId);
+
+        if (membership == null) {
+            throw new NoSuchMembershipException("No such membership with id " + membershipId);
+        }
+
         membership.modifyValues(nameValueList);
 
         membershipStore.update(membership);
@@ -115,6 +121,10 @@ public class MembershipServiceLogic implements MembershipService {
     @Override
     public void removeMembership(String membershipId) {
         //
+        if (!membershipStore.exists(membershipId)) {
+            throw new NoSuchMembershipException("No such membership with id " + membershipId);
+        }
+
         membershipStore.delete(membershipId);
     }
 }

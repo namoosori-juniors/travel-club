@@ -14,5 +14,5 @@ public interface MembershipStore {
     void update(Membership membership);
     void delete(String membershipId);
 
-    boolean exists(String clubId, String memberId);
+    boolean exists(String membershipId);
 }
