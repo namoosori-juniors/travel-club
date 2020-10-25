@@ -1,0 +1,22 @@
+buildscript {
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootGradlePluginVersion}")
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.0.4.RELEASE'
+}
+
+apply plugin: "java"
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+}
+
+dependencies {
+    api project(':travel-club-rest')
+    implementation("io.springfox:springfox-swagger2:${swaggerVersion}")
+    implementation("io.springfox:springfox-swagger-ui:${swaggerVersion}")
+    implementation("org.springframework.boot:spring-boot-starter-web")
+}

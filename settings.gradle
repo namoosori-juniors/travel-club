@@ -1,2 +1,5 @@
 rootProject.name = 'travel-club-spring'
-
+include 'travel-club-spec'
+include 'travel-club-aggregate'
+include 'travel-club-boot'
+include 'travel-club-rest'
