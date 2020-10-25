@@ -53,7 +53,7 @@ public class TravelClub extends Entity {
 		//
 		if (name.length() < TravelClub.MINIMUM_NAME_LENGTH) {
 			//
-			throw new IllegalArgumentException("Name should be longer than " + TravelClub.MINIMUM_NAME_LENGTH);
+			throw new IllegalArgumentException("\t > Name should be longer than " + TravelClub.MINIMUM_NAME_LENGTH);
 		}
 	}
 
@@ -61,7 +61,7 @@ public class TravelClub extends Entity {
 		//
 		if (intro.length() < TravelClub.MINIMUM_INTRO_LENGTH) {
 			//
-			throw new IllegalArgumentException("Intro should be longer than " + TravelClub.MINIMUM_INTRO_LENGTH);
+			throw new IllegalArgumentException("\t > Intro should be longer than " + TravelClub.MINIMUM_INTRO_LENGTH);
 		}
 	}
 

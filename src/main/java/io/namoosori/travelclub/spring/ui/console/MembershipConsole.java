@@ -169,11 +169,9 @@ public class MembershipConsole {
 		}
 
 		try {
-			String clubId = membership.getClubId();
-			String memberId = membership.getMemberId();
-			membershipService.modifyMembership(clubId, memberId, nameValueList);
+			membershipService.modifyMembership(membership.getId(), nameValueList);
 
-			Membership modifiedMembership = membershipService.findMembershipByClubIdAndMemberId(clubId, memberId);
+			Membership modifiedMembership = membershipService.findMembership(membership.getId());
 			narrator.sayln("\t > Modified membership information: " + modifiedMembership);
 
 		} catch (IllegalArgumentException e) {
@@ -198,7 +196,7 @@ public class MembershipConsole {
 		if (confirmStr.toLowerCase().equals("y") || confirmStr.toLowerCase().equals("yes")) {
 			//
 			narrator.sayln("\t > Removing a membership -->" + membership.getMemberId());
-			membershipService.removeMembership(membership.getClubId(), membership.getMemberId());
+			membershipService.removeMembership(membership.getClubId());
 		} else {
 			narrator.sayln("\t > Remove cancelled, membership is safe. --> " + membership.getMemberId());
 		}

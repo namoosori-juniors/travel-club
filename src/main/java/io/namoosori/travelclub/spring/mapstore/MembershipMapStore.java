@@ -26,7 +26,13 @@ public class MembershipMapStore implements MembershipStore {
 	}
 
 	@Override
-	public Membership retrieve(String clubId, String memberId) {
+	public Membership retrieve(String membershipId) {
+		//
+		return membershipMap.get(membershipId);
+	}
+
+	@Override
+	public Membership retrieveByClubIdAndMemberId(String clubId, String memberId) {
 		//
 		Membership targetMembership = null;
 
@@ -63,15 +69,14 @@ public class MembershipMapStore implements MembershipStore {
 	}
 
 	@Override
-	public void delete(String clubId, String memberId) {
+	public void delete(String membershipId) {
 		//
-		Membership targetMembership = retrieve(clubId, memberId);
-		membershipMap.remove(targetMembership.getId());
+		membershipMap.remove(membershipId);
 	}
 
 	@Override
-	public boolean exists(String clubId, String memberId) {
+	public boolean exists(String membershipId) {
 		//
-		return Optional.ofNullable(retrieve(clubId, memberId)).isPresent();
+		return Optional.ofNullable(retrieve(membershipId)).isPresent();
 	}
 }

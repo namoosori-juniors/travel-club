@@ -6,6 +6,7 @@ import io.namoosori.travelclub.spring.service.sdo.TravelClubCdo;
 import io.namoosori.travelclub.spring.shared.NameValueList;
 import io.namoosori.travelclub.spring.store.ClubStore;
 import io.namoosori.travelclub.spring.store.SequenceStore;
+import io.namoosori.travelclub.spring.util.exception.NoSuchClubException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -58,6 +59,11 @@ public class ClubServiceLogic implements ClubService {
 	public void modify(String clubId, NameValueList nameValueList) {
 		//
 		TravelClub travelClub = clubStore.retrieve(clubId);
+
+		if (travelClub == null) {
+			throw new NoSuchClubException("No such club with id " + clubId);
+		}
+
 		travelClub.modifyValues(nameValueList);
 
 		clubStore.update(travelClub);
@@ -66,6 +72,10 @@ public class ClubServiceLogic implements ClubService {
 	@Override
 	public void remove(String clubId) {
 		//
+		if (!clubStore.exists(clubId)) {
+			throw new NoSuchClubException("No such club with id " + clubId);
+		}
+
 		clubStore.delete(clubId);
 	}
 }

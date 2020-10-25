@@ -7,11 +7,12 @@ import java.util.List;
 public interface MembershipStore {
     //
     String create(Membership membership);
-    Membership retrieve(String clubId, String memberId);
+    Membership retrieve(String membershipId);
+    Membership retrieveByClubIdAndMemberId(String clubId, String memberId);
     List<Membership> retrieveByClubId(String clubId);
     List<Membership> retrieveByMemberId(String memberId);
     void update(Membership membership);
-    void delete(String clubId, String memberId);
+    void delete(String membershipId);
 
-    boolean exists(String clubId, String memberId);
+    boolean exists(String membershipId);
 }

@@ -6,6 +6,7 @@ import io.namoosori.travelclub.spring.service.sdo.MemberCdo;
 import io.namoosori.travelclub.spring.shared.NameValueList;
 import io.namoosori.travelclub.spring.store.MemberStore;
 import io.namoosori.travelclub.spring.util.exception.MemberDuplicationException;
+import io.namoosori.travelclub.spring.util.exception.NoSuchMemberException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -63,9 +64,14 @@ public class MemberServiceLogic implements MemberService {
 	}
 
 	@Override
-	public void modifyMember(String memberEmail, NameValueList nameValueList) {
+	public void modifyMember(String memberId, NameValueList nameValueList) {
 		//
-		CommunityMember targetMember = memberStore.retrieveByEmail(memberEmail);
+		CommunityMember targetMember = memberStore.retrieve(memberId);
+
+		if (targetMember == null) {
+			throw new NoSuchMemberException("No such member with id " + memberId);
+		}
+
 		targetMember.modifyValues(nameValueList);
 
 		memberStore.update(targetMember);
@@ -75,6 +81,10 @@ public class MemberServiceLogic implements MemberService {
 	@Override
 	public void removeMember(String memberId) {
 		//
+		if (!memberStore.exists(memberId)) {
+			throw new NoSuchMemberException("No such member with id " + memberId);
+		}
+
 		memberStore.delete(memberId);
 	}
 }

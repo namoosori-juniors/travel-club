@@ -13,6 +13,7 @@ import io.namoosori.travelclub.spring.store.MembershipStore;
 import io.namoosori.travelclub.spring.util.exception.MembershipDuplicationException;
 import io.namoosori.travelclub.spring.util.exception.NoSuchClubException;
 import io.namoosori.travelclub.spring.util.exception.NoSuchMemberException;
+import io.namoosori.travelclub.spring.util.exception.NoSuchMembershipException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -64,9 +65,15 @@ public class MembershipServiceLogic implements MembershipService {
     }
 
     @Override
+    public Membership findMembership(String membershipId) {
+        //
+        return membershipStore.retrieve(membershipId);
+    }
+
+    @Override
     public Membership findMembershipByClubIdAndMemberId(String clubId, String memberId) {
         //
-        return membershipStore.retrieve(clubId, memberId);
+        return membershipStore.retrieve(clubId);
     }
 
     @Override
@@ -95,17 +102,22 @@ public class MembershipServiceLogic implements MembershipService {
     }
 
     @Override
-    public void modifyMembership(String clubId, String memberId, NameValueList nameValueList) {
+    public void modifyMembership(String membershipId, NameValueList nameValueList) {
         //
-        Membership membership = membershipStore.retrieve(clubId, memberId);
+        Membership membership = membershipStore.retrieve(membershipId);
+
+        if (membership == null) {
+            throw new NoSuchMembershipException("No such membership");
+        }
+
         membership.modifyValues(nameValueList);
 
         membershipStore.update(membership);
     }
 
     @Override
-    public void removeMembership(String clubId, String memberId) {
+    public void removeMembership(String membershipId) {
         //
-        membershipStore.delete(clubId, memberId);
+        membershipStore.delete(membershipId);
     }
 }
