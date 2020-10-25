@@ -13,22 +13,21 @@ import io.namoosori.travelclub.spring.store.MembershipStore;
 import io.namoosori.travelclub.spring.util.exception.MembershipDuplicationException;
 import io.namoosori.travelclub.spring.util.exception.NoSuchClubException;
 import io.namoosori.travelclub.spring.util.exception.NoSuchMemberException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class MembershipServiceLogic implements MembershipService {
     //
+    @Autowired
     private MembershipStore membershipStore;
+    @Autowired
     private ClubStore clubStore;
+    @Autowired
     private MemberStore memberStore;
 
-    public MembershipServiceLogic(MembershipStore membershipStore,
-                                  ClubStore clubStore,
-                                  MemberStore memberStore) {
+    public MembershipServiceLogic() {
         //
-        this.membershipStore = membershipStore;
-        this.clubStore = clubStore;
-        this.memberStore = memberStore;
     }
 
     @Override

@@ -7,17 +7,18 @@ import io.namoosori.travelclub.spring.shared.NameValueList;
 import io.namoosori.travelclub.spring.util.helper.ConsoleUtil;
 import io.namoosori.travelclub.spring.util.helper.Narrator;
 import io.namoosori.travelclub.spring.util.helper.TalkingAt;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class ClubConsole {
 	//
+	@Autowired
 	private ClubService clubService;
 
 	private ConsoleUtil consoleUtil;
 	private Narrator narrator;
 
-	public ClubConsole(ClubService clubService) {
+	public ClubConsole() {
 		//
-		this.clubService = clubService;
 		this.narrator = new Narrator(this, TalkingAt.Left);
 		this.consoleUtil = new ConsoleUtil(narrator);
 	}

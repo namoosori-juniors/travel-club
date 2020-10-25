@@ -6,18 +6,19 @@ import io.namoosori.travelclub.spring.service.sdo.TravelClubCdo;
 import io.namoosori.travelclub.spring.shared.NameValueList;
 import io.namoosori.travelclub.spring.store.ClubStore;
 import io.namoosori.travelclub.spring.store.SequenceStore;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class ClubServiceLogic implements ClubService {
 	//
+	@Autowired
 	private ClubStore clubStore;
+	@Autowired
 	private SequenceStore sequenceStore;
 
-	public ClubServiceLogic(ClubStore clubStore, SequenceStore sequenceStore) {
+	public ClubServiceLogic() {
 		//
-		this.clubStore = clubStore;
-		this.sequenceStore = sequenceStore;
 	}
 
 	@Override

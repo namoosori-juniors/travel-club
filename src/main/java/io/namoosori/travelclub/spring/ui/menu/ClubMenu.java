@@ -3,20 +3,20 @@ package io.namoosori.travelclub.spring.ui.menu;
 import io.namoosori.travelclub.spring.ui.console.ClubConsole;
 import io.namoosori.travelclub.spring.util.helper.Narrator;
 import io.namoosori.travelclub.spring.util.helper.TalkingAt;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Scanner;
 
 public class ClubMenu {
 	//
+	@Autowired
 	private ClubConsole clubConsole;
 	
 	private Scanner scanner;
 	private Narrator narrator;
 
-	public ClubMenu(ClubConsole clubConsole) {
+	public ClubMenu() {
 		//
-		this.clubConsole = clubConsole;
-
 		this.scanner = new Scanner(System.in);
 		this.narrator = new Narrator(this, TalkingAt.Left);
 	}

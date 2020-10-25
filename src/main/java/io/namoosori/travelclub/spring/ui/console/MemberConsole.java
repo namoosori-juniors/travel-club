@@ -10,17 +10,18 @@ import io.namoosori.travelclub.spring.util.exception.NoSuchMemberException;
 import io.namoosori.travelclub.spring.util.helper.ConsoleUtil;
 import io.namoosori.travelclub.spring.util.helper.Narrator;
 import io.namoosori.travelclub.spring.util.helper.TalkingAt;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class MemberConsole {
 	//
+	@Autowired
 	private MemberService memberService;
 
 	private ConsoleUtil consoleUtil;
 	private Narrator narrator;
 
-	public MemberConsole(MemberService memberService) {
+	public MemberConsole() {
 		//
-		this.memberService = memberService;
 		this.narrator = new Narrator(this, TalkingAt.Left);
 		this.consoleUtil = new ConsoleUtil(narrator);
 	}

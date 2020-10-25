@@ -29,73 +29,6 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("io.namoosori.travelclub.spring")
 public class TravelClubConfig {
     //
-    /* Menu */
-    @Bean
-    public MainMenu mainMenu() {
-        //
-        return new MainMenu(
-                clubMenu(),
-                memberMenu(),
-                membershipMenu()
-        );
-    }
-
-    @Bean
-    public ClubMenu clubMenu() {
-        //
-        return new ClubMenu(clubConsole());
-    }
-
-    @Bean
-    public MemberMenu memberMenu() {
-        //
-        return new MemberMenu(memberConsole());
-    }
-
-    @Bean
-    public MembershipMenu membershipMenu() {
-        //
-        return new MembershipMenu(membershipConsole());
-    }
-
-    /* Console */
-    @Bean
-    public ClubConsole clubConsole() {
-        //
-        return new ClubConsole(clubService());
-    }
-
-    @Bean
-    public MemberConsole memberConsole() {
-        //
-        return new MemberConsole(memberService());
-    }
-
-    @Bean
-    public MembershipConsole membershipConsole() {
-        //
-        return new MembershipConsole(membershipService(), clubService());
-    }
-
-    /* Service */
-    @Bean
-    public ClubService clubService() {
-        //
-        return new ClubServiceLogic(clubStore(), sequenceStore());
-    }
-
-    @Bean
-    public MemberService memberService() {
-        //
-        return new MemberServiceLogic(memberStore());
-    }
-
-    @Bean
-    public MembershipService membershipService() {
-        //
-        return new MembershipServiceLogic(membershipStore(), clubStore(), memberStore());
-    }
-
     /* Store */
     @Bean
     public ClubStore clubStore() {
@@ -119,5 +52,68 @@ public class TravelClubConfig {
     public SequenceStore sequenceStore() {
         //
         return new SequenceMapStore();
+    }
+
+    /* Service */
+    @Bean
+    public ClubService clubService() {
+        //
+        return new ClubServiceLogic();
+    }
+
+    @Bean
+    public MemberService memberService() {
+        //
+        return new MemberServiceLogic();
+    }
+
+    @Bean
+    public MembershipService membershipService() {
+        //
+        return new MembershipServiceLogic();
+    }
+
+    /* Console */
+    @Bean
+    public ClubConsole clubConsole() {
+        //
+        return new ClubConsole();
+    }
+
+    @Bean
+    public MemberConsole memberConsole() {
+        //
+        return new MemberConsole();
+    }
+
+    @Bean
+    public MembershipConsole membershipConsole() {
+        //
+        return new MembershipConsole();
+    }
+
+    /* Menu */
+    @Bean
+    public MainMenu mainMenu() {
+        //
+        return new MainMenu();
+    }
+
+    @Bean
+    public ClubMenu clubMenu() {
+        //
+        return new ClubMenu();
+    }
+
+    @Bean
+    public MemberMenu memberMenu() {
+        //
+        return new MemberMenu();
+    }
+
+    @Bean
+    public MembershipMenu membershipMenu() {
+        //
+        return new MembershipMenu();
     }
 }

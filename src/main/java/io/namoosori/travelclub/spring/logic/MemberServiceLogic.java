@@ -6,16 +6,17 @@ import io.namoosori.travelclub.spring.service.sdo.MemberCdo;
 import io.namoosori.travelclub.spring.shared.NameValueList;
 import io.namoosori.travelclub.spring.store.MemberStore;
 import io.namoosori.travelclub.spring.util.exception.MemberDuplicationException;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class MemberServiceLogic implements MemberService {
 	//
+	@Autowired
 	private MemberStore memberStore;
 
-	public MemberServiceLogic(MemberStore memberStore) {
+	public MemberServiceLogic() {
 		//
-		this.memberStore = memberStore;
 	}
 
 	@Override

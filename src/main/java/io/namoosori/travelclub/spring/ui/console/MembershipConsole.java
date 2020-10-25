@@ -15,6 +15,7 @@ import io.namoosori.travelclub.spring.util.helper.ConsoleUtil;
 import io.namoosori.travelclub.spring.util.helper.Narrator;
 import io.namoosori.travelclub.spring.util.helper.StringUtil;
 import io.namoosori.travelclub.spring.util.helper.TalkingAt;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 
@@ -22,18 +23,16 @@ public class MembershipConsole {
 	//
 	private TravelClub currentClub;
 
+	@Autowired
 	private MembershipService membershipService;
+	@Autowired
 	private ClubService clubService;
 
 	private ConsoleUtil consoleUtil;
 	private Narrator narrator;
 
-	public MembershipConsole(MembershipService membershipService,
-							 ClubService clubService) {
+	public MembershipConsole() {
 		//
-		this.membershipService = membershipService;
-		this.clubService = clubService;
-
 		this.narrator = new Narrator(this, TalkingAt.Left);
 		this.consoleUtil = new ConsoleUtil(narrator);
 	}

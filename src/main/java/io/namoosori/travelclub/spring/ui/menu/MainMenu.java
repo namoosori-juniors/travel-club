@@ -2,24 +2,24 @@ package io.namoosori.travelclub.spring.ui.menu;
 
 import io.namoosori.travelclub.spring.util.helper.Narrator;
 import io.namoosori.travelclub.spring.util.helper.TalkingAt;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Scanner;
 
 public class MainMenu {
 	//
+	@Autowired
 	private ClubMenu clubMenu;
+	@Autowired
 	private MemberMenu memberMenu;
+	@Autowired
 	private MembershipMenu membershipMenu;
 	
 	private Scanner scanner;
 	private Narrator narrator;
 
-	public MainMenu(ClubMenu clubMenu, MemberMenu memberMenu, MembershipMenu membershipMenu) {
+	public MainMenu() {
 		//
-		this.clubMenu = clubMenu;
-		this.memberMenu = memberMenu;
-		this.membershipMenu = membershipMenu;
-		
 		this.scanner = new Scanner(System.in);
 		this.narrator = new Narrator(this, TalkingAt.Left);
 	}
