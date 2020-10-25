@@ -1,9 +1,9 @@
 package io.namoosori.travelclub.spring;
 
-import io.namoosori.travelclub.spring.da.map.ClubMapStore;
-import io.namoosori.travelclub.spring.da.map.MemberMapStore;
-import io.namoosori.travelclub.spring.da.map.MembershipMapStore;
-import io.namoosori.travelclub.spring.da.map.SequenceMapStore;
+import io.namoosori.travelclub.spring.mapstore.ClubMapStore;
+import io.namoosori.travelclub.spring.mapstore.MemberMapStore;
+import io.namoosori.travelclub.spring.mapstore.MembershipMapStore;
+import io.namoosori.travelclub.spring.mapstore.SequenceMapStore;
 import io.namoosori.travelclub.spring.logic.ClubServiceLogic;
 import io.namoosori.travelclub.spring.logic.MemberServiceLogic;
 import io.namoosori.travelclub.spring.logic.MembershipServiceLogic;

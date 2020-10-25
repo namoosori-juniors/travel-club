@@ -1,4 +1,4 @@
-package io.namoosori.travelclub.spring.da.map;
+package io.namoosori.travelclub.spring.mapstore;
 
 import io.namoosori.travelclub.spring.store.SequenceStore;
 
