@@ -47,7 +47,13 @@ public class TravelClub extends Entity {
 		return builder.toString(); 
 	}
 
-	public static void checkNameValidation(String name) {
+	public void checkValidation() {
+		//
+		checkNameValidation(name);
+		checkIntroValidation(intro);
+	}
+
+	private void checkNameValidation(String name) {
 		//
 		if (name.length() < TravelClub.MINIMUM_NAME_LENGTH) {
 			//
@@ -55,7 +61,7 @@ public class TravelClub extends Entity {
 		}
 	}
 
-	public static void checkIntroValidation(String intro) {
+	private void checkIntroValidation(String intro) {
 		//
 		if (intro.length() < TravelClub.MINIMUM_INTRO_LENGTH) {
 			//
