@@ -24,8 +24,6 @@ public class MemberServiceLogic implements MemberService {
 	@Override
 	public String registerMember(MemberCdo newMemberCdo) {
 		//
-		newMemberCdo.checkValidation();
-
 		String email = newMemberCdo.getEmail();
 		CommunityMember member = memberStore.retrieveByEmail(email);
 
@@ -40,6 +38,8 @@ public class MemberServiceLogic implements MemberService {
 		);
 		member.setNickName(newMemberCdo.getNickName());
 		member.setBirthDay(newMemberCdo.getBirthDay());
+
+		member.checkValidation();
 
 		memberStore.create(member);
 

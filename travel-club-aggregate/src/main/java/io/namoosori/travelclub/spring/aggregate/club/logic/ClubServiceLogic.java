@@ -26,13 +26,12 @@ public class ClubServiceLogic implements ClubService {
 	@Override
 	public String registerClub(TravelClubCdo clubCdo) {
 		//
-		clubCdo.checkValidation();
-
 		String className = TravelClub.class.getSimpleName();
 		int keySequence = sequenceStore.increaseAndGet(className);
 		String sequence = String.format("%05d", keySequence);
 
 		TravelClub club = new TravelClub(sequence, clubCdo.getName(), clubCdo.getIntro());
+		club.checkValidation();
 		String clubId = clubStore.create(club);
 
 		return clubId;
