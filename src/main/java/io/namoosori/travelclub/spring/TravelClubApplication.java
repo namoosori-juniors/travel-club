@@ -1,16 +1,21 @@
 package io.namoosori.travelclub.spring;
 
-import io.namoosori.travelclub.spring.ui.menu.MainMenu;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import io.namoosori.travelclub.spring.service.ClubService;
+import io.namoosori.travelclub.spring.service.sdo.TravelClubCdo;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-@EnableSwagger2
 public class TravelClubApplication {
     //
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(TravelClubConfig.class);
+        ApplicationContext context = new ClassPathXmlApplicationContext(
+                "applicationContext.xml");
 
-        MainMenu mainMenu = context.getBean("mainMenu", MainMenu.class);
-        mainMenu.show();
+        TravelClubCdo clubCdo = new TravelClubCdo("travelclub", "travelclub");
+        ClubService clubService = context.getBean("clubService", ClubService.class);
+
+        String clubId = clubService.registerClub(clubCdo);
+
+        System.out.println(clubId);
     }
 }

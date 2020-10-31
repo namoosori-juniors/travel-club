@@ -15,7 +15,6 @@ public class TravelClub extends Entity {
 	private static final int MINIMUM_NAME_LENGTH =  3;
 	private static final int MINIMUM_INTRO_LENGTH =  10;
 
-	private String usid; 		// auto incremental style
 	private String name;
 	private String intro;
 	private long foundationTime;
@@ -25,10 +24,9 @@ public class TravelClub extends Entity {
 		super(id);
 	}
 
-	public TravelClub(String usid, String name, String intro) {
+	public TravelClub(String name, String intro) {
 		//
 		super();
-		this.usid = usid;
 		this.name = name;
 		this.intro = intro;
 		this.foundationTime = System.currentTimeMillis();
@@ -36,15 +34,15 @@ public class TravelClub extends Entity {
 
 	@Override
 	public String toString() {
-		// 
+		//
 		StringBuilder builder = new StringBuilder();
-		
-		builder.append("Travel Club Id:").append(usid); 
-		builder.append(", name:").append(name); 
-		builder.append(", intro:").append(intro); 
+
+		builder.append("Travel Club Id:").append(id);
+		builder.append(", name:").append(name);
+		builder.append(", intro:").append(intro);
 		builder.append(", foundation day:").append(foundationTime);
-		
-		return builder.toString(); 
+
+		return builder.toString();
 	}
 
 	public void checkValidation() {
@@ -56,7 +54,6 @@ public class TravelClub extends Entity {
 	private void checkNameValidation(String name) {
 		//
 		if (name.length() < TravelClub.MINIMUM_NAME_LENGTH) {
-			//
 			throw new IllegalArgumentException("\t > Name should be longer than " + TravelClub.MINIMUM_NAME_LENGTH);
 		}
 	}
@@ -64,7 +61,6 @@ public class TravelClub extends Entity {
 	private void checkIntroValidation(String intro) {
 		//
 		if (intro.length() < TravelClub.MINIMUM_INTRO_LENGTH) {
-			//
 			throw new IllegalArgumentException("\t > Intro should be longer than " + TravelClub.MINIMUM_INTRO_LENGTH);
 		}
 	}
@@ -91,7 +87,7 @@ public class TravelClub extends Entity {
 		String name = "JavaTravelClub";
 		String intro = "Travel club to the Java island.";
 
-		return new TravelClub("00001", name, intro);
+		return new TravelClub(name, intro);
 	}
 
 	public static void main(String[] args) {

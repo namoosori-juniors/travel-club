@@ -3,7 +3,7 @@ package io.namoosori.travelclub.spring.aggregate;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
+import java.util.*;
 
 @Getter
 @Setter

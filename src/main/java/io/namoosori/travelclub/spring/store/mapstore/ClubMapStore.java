@@ -1,4 +1,4 @@
-package io.namoosori.travelclub.spring.mapstore;
+package io.namoosori.travelclub.spring.store.mapstore;
 
 import io.namoosori.travelclub.spring.aggregate.club.TravelClub;
 import io.namoosori.travelclub.spring.store.ClubStore;
@@ -30,21 +30,6 @@ public class ClubMapStore implements ClubStore {
 	public TravelClub retrieve(String clubId) {
 		//
 		return clubMap.get(clubId);
-	}
-
-	@Override
-	public TravelClub retrieveByUsid(String clubUsid) {
-		//
-		TravelClub targetClub = null;
-
-		for (TravelClub club : clubMap.values()) {
-			if (club.getUsid().equals(clubUsid)) {
-				targetClub = club;
-				break;
-			}
-		}
-
-		return targetClub;
 	}
 
 	@Override

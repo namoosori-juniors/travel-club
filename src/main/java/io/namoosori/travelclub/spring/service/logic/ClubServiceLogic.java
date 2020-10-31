@@ -1,36 +1,27 @@
-package io.namoosori.travelclub.spring.logic;
+package io.namoosori.travelclub.spring.service.logic;
 
 import io.namoosori.travelclub.spring.aggregate.club.TravelClub;
 import io.namoosori.travelclub.spring.service.ClubService;
 import io.namoosori.travelclub.spring.service.sdo.TravelClubCdo;
 import io.namoosori.travelclub.spring.shared.NameValueList;
 import io.namoosori.travelclub.spring.store.ClubStore;
-import io.namoosori.travelclub.spring.store.SequenceStore;
 import io.namoosori.travelclub.spring.util.exception.NoSuchClubException;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class ClubServiceLogic implements ClubService {
 	//
-	@Autowired
 	private ClubStore clubStore;
-	@Autowired
-	private SequenceStore sequenceStore;
 
-	public ClubServiceLogic() {
+	public ClubServiceLogic(ClubStore clubStore) {
 		//
+		this.clubStore = clubStore;
 	}
 
 	@Override
 	public String registerClub(TravelClubCdo clubCdo) {
 		//
-		String className = TravelClub.class.getSimpleName();
-		int keySequence = sequenceStore.increaseAndGet(className);
-		String sequence = String.format("%05d", keySequence);
-
-		TravelClub club = new TravelClub(sequence, clubCdo.getName(), clubCdo.getIntro());
-
+		TravelClub club = new TravelClub(clubCdo.getName(), clubCdo.getIntro());
 		club.checkValidation();
 
 		String clubId = clubStore.create(club);
@@ -42,12 +33,6 @@ public class ClubServiceLogic implements ClubService {
 	public TravelClub findClubById(String id) {
 		//
 		return clubStore.retrieve(id);
-	}
-
-	@Override
-	public TravelClub findClubByUsid(String usid) {
-		//
-		return clubStore.retrieveByUsid(usid);
 	}
 
 	@Override

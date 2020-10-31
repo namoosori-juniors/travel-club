@@ -1,4 +1,4 @@
-package io.namoosori.travelclub.spring.logic;
+package io.namoosori.travelclub.spring.service.logic;
 
 import io.namoosori.travelclub.spring.aggregate.club.CommunityMember;
 import io.namoosori.travelclub.spring.aggregate.club.Membership;
@@ -20,15 +20,17 @@ import java.util.List;
 
 public class MembershipServiceLogic implements MembershipService {
     //
-    @Autowired
     private MembershipStore membershipStore;
-    @Autowired
     private ClubStore clubStore;
-    @Autowired
     private MemberStore memberStore;
 
-    public MembershipServiceLogic() {
+    public MembershipServiceLogic(MembershipStore membershipStore,
+                                  ClubStore clubStore,
+                                  MemberStore memberStore) {
         //
+        this.membershipStore = membershipStore;
+        this.memberStore = memberStore;
+        this.clubStore = clubStore;
     }
 
     @Override

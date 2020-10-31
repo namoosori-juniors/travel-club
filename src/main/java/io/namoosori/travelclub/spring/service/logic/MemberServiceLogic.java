@@ -1,4 +1,4 @@
-package io.namoosori.travelclub.spring.logic;
+package io.namoosori.travelclub.spring.service.logic;
 
 import io.namoosori.travelclub.spring.aggregate.club.CommunityMember;
 import io.namoosori.travelclub.spring.service.MemberService;
@@ -7,17 +7,16 @@ import io.namoosori.travelclub.spring.shared.NameValueList;
 import io.namoosori.travelclub.spring.store.MemberStore;
 import io.namoosori.travelclub.spring.util.exception.MemberDuplicationException;
 import io.namoosori.travelclub.spring.util.exception.NoSuchMemberException;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class MemberServiceLogic implements MemberService {
 	//
-	@Autowired
 	private MemberStore memberStore;
 
-	public MemberServiceLogic() {
+	public MemberServiceLogic(MemberStore memberStore) {
 		//
+		this.memberStore = memberStore;
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-package io.namoosori.travelclub.spring.mapstore;
+package io.namoosori.travelclub.spring.store.mapstore;
 
 import io.namoosori.travelclub.spring.aggregate.club.Membership;
 import io.namoosori.travelclub.spring.store.MembershipStore;
