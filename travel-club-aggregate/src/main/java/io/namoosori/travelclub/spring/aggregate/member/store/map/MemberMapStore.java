@@ -4,10 +4,7 @@ import io.namoosori.travelclub.spring.aggregate.member.store.MemberStore;
 import io.namoosori.travelclub.spring.spec.aggregate.club.CommunityMember;
 import org.springframework.stereotype.Repository;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
@@ -57,6 +54,12 @@ public class MemberMapStore implements MemberStore {
 	}
 
 	@Override
+	public List<CommunityMember> retrieveAll() {
+		//
+		return new ArrayList<>(memberMap.values());
+	}
+
+	@Override
 	public void update(CommunityMember member) {
 		//
 		memberMap.put(member.getId(), member);
@@ -74,4 +77,3 @@ public class MemberMapStore implements MemberStore {
 		return Optional.ofNullable(memberMap.get(memberId)).isPresent();
 	}
 }
-

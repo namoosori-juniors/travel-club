@@ -8,10 +8,10 @@ public interface ClubStore {
 	//
 	String create(TravelClub club);
 	TravelClub retrieve(String clubId);
-	TravelClub retrieveByUsid(String clubUsid);
 	List<TravelClub> retrieveByName(String name);
+	List<TravelClub> retrieveAll();
 	void update(TravelClub club);
 	void delete(String clubId);
-	
+
 	boolean exists(String clubId);
 }

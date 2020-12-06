@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/club")
 public class TravelClubResource implements TravelClubFacade {
@@ -39,6 +40,13 @@ public class TravelClubResource implements TravelClubFacade {
     public List<TravelClub> findTravelClubsByName(@RequestParam String name) {
         //
         return clubService.findClubsByName(name);
+    }
+
+    @GetMapping("/all")
+    @Override
+    public List<TravelClub> findAllTravelClubs() {
+        //
+        return clubService.findAllClubs();
     }
 
     @PutMapping("/{clubId}")

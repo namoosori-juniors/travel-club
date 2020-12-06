@@ -4,10 +4,7 @@ import io.namoosori.travelclub.spring.aggregate.club.store.ClubStore;
 import io.namoosori.travelclub.spring.spec.aggregate.club.TravelClub;
 import org.springframework.stereotype.Repository;
 
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
@@ -35,26 +32,17 @@ public class ClubMapStore implements ClubStore {
 	}
 
 	@Override
-	public TravelClub retrieveByUsid(String clubUsid) {
-		//
-		TravelClub targetClub = null;
-
-		for (TravelClub club : clubMap.values()) {
-			if (club.getUsid().equals(clubUsid)) {
-				targetClub = club;
-				break;
-			}
-		}
-
-		return targetClub;
-	}
-
-	@Override
 	public List<TravelClub> retrieveByName(String name) {
 		//
 		return clubMap.values().stream()
 				.filter(club -> club.getName().equals(name))
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public List<TravelClub> retrieveAll() {
+		//
+		return new ArrayList<>(clubMap.values());
 	}
 
 	@Override

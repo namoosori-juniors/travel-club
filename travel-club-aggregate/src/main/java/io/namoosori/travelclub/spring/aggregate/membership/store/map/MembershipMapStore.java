@@ -79,6 +79,6 @@ public class MembershipMapStore implements MembershipStore {
 	@Override
 	public boolean exists(String membershipId) {
 		//
-		return Optional.ofNullable(membershipMap.get(membershipId)).isPresent();
+		return Optional.ofNullable(retrieve(membershipId)).isPresent();
 	}
 }

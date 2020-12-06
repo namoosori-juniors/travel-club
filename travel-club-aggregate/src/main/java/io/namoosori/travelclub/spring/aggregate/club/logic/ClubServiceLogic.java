@@ -2,7 +2,6 @@ package io.namoosori.travelclub.spring.aggregate.club.logic;
 
 import io.namoosori.travelclub.spring.aggregate.club.service.ClubService;
 import io.namoosori.travelclub.spring.aggregate.club.store.ClubStore;
-import io.namoosori.travelclub.spring.aggregate.sequence.SequenceStore;
 import io.namoosori.travelclub.spring.spec.aggregate.club.TravelClub;
 import io.namoosori.travelclub.spring.spec.facade.aggregate.club.sdo.TravelClubCdo;
 import io.namoosori.travelclub.spring.spec.facade.shared.NameValueList;
@@ -15,23 +14,18 @@ import java.util.List;
 public class ClubServiceLogic implements ClubService {
 	//
 	private ClubStore clubStore;
-	private SequenceStore sequenceStore;
 
-	public ClubServiceLogic(ClubStore clubStore, SequenceStore sequenceStore) {
+	public ClubServiceLogic(ClubStore clubStore) {
 		//
 		this.clubStore = clubStore;
-		this.sequenceStore = sequenceStore;
 	}
 
 	@Override
 	public String registerClub(TravelClubCdo clubCdo) {
 		//
-		String className = TravelClub.class.getSimpleName();
-		int keySequence = sequenceStore.increaseAndGet(className);
-		String sequence = String.format("%05d", keySequence);
-
-		TravelClub club = new TravelClub(sequence, clubCdo.getName(), clubCdo.getIntro());
+		TravelClub club = new TravelClub(clubCdo.getName(), clubCdo.getIntro());
 		club.checkValidation();
+
 		String clubId = clubStore.create(club);
 
 		return clubId;
@@ -44,15 +38,15 @@ public class ClubServiceLogic implements ClubService {
 	}
 
 	@Override
-	public TravelClub findClubByUsid(String usid) {
-		//
-		return clubStore.retrieveByUsid(usid);
-	}
-
-	@Override
 	public List<TravelClub> findClubsByName(String name) {
 		//
 		return clubStore.retrieveByName(name);
+	}
+
+	@Override
+	public List<TravelClub> findAllClubs() {
+		//
+		return clubStore.retrieveAll();
 	}
 
 	@Override

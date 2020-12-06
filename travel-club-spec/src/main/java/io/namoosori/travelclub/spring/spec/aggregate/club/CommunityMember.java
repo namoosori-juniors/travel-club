@@ -22,7 +22,7 @@ public class CommunityMember extends Entity {
 	private String birthDay;
 
 	private List<Address> addresses;
-	
+
 	public CommunityMember() {
 		//
 		super();
@@ -33,34 +33,34 @@ public class CommunityMember extends Entity {
 		//
 		super(id);
 	}
-	
+
 	public CommunityMember(String email, String name, String phoneNumber) {
-		// 
+		//
 		this();
 		this.email = email;
 		this.name = name;
-		this.phoneNumber = phoneNumber; 
+		this.phoneNumber = phoneNumber;
 	}
 
 	@Override
 	public String toString() {
-		// 
+		//
 		StringBuilder builder = new StringBuilder();
-		
-		builder.append("Name:").append(name); 
-		builder.append(", email:").append(email); 
-		builder.append(", nickname:").append(nickName); 
-		builder.append(", phone number:").append(phoneNumber); 
-		builder.append(", birthDay:").append(birthDay); 
+
+		builder.append("Name:").append(name);
+		builder.append(", email:").append(email);
+		builder.append(", nickname:").append(nickName);
+		builder.append(", phone number:").append(phoneNumber);
+		builder.append(", birthDay:").append(birthDay);
 
 		if (addresses != null) {
-			int i = 1; 
+			int i = 1;
 			for (Address address : addresses) {
 				builder.append(", Address[").append(i).append("]").append(address.toString());
 			}
 		}
-		
-		return builder.toString(); 
+
+		return builder.toString();
 	}
 
 	public void checkValidation() {
