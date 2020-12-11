@@ -3,10 +3,13 @@ package io.namoosori.travelclub.spring.rest.aggregate.club;
 import io.namoosori.travelclub.spring.aggregate.member.service.MemberService;
 import io.namoosori.travelclub.spring.spec.aggregate.club.CommunityMember;
 import io.namoosori.travelclub.spring.spec.facade.aggregate.club.facade.MemberFacade;
-import io.namoosori.travelclub.spring.spec.facade.shared.NameValueList;
 import io.namoosori.travelclub.spring.spec.facade.aggregate.club.sdo.MemberCdo;
+import io.namoosori.travelclub.spring.spec.facade.shared.NameValueList;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/member")
 public class MemberResource implements MemberFacade {
@@ -34,9 +37,16 @@ public class MemberResource implements MemberFacade {
 
     @GetMapping
     @Override
-    public CommunityMember findMemberByEmail(@RequestParam String memberEmail) {
+    public List<CommunityMember> findMemberByName(@RequestParam String name) {
         //
-        return memberService.findMemberByEmail(memberEmail);
+        return memberService.findMembersByName(name);
+    }
+
+    @GetMapping("/all")
+    @Override
+    public List<CommunityMember> findAllMembers() {
+        //
+        return memberService.findAllMembers();
     }
 
     @PutMapping("/{memberId}")

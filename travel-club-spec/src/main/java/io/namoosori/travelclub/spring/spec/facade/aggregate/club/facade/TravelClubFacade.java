@@ -12,6 +12,7 @@ public interface TravelClubFacade {
     String registerClub(TravelClubCdo travelClubCdo);
     TravelClub findTravelClubById(String clubId);
     List<TravelClub> findTravelClubsByName(String name);
+    List<TravelClub> findAllTravelClubs();
     void modifyTravelClub(String clubId, NameValueList nameValueList);
     void removeTravelClub(String clubId);
 }

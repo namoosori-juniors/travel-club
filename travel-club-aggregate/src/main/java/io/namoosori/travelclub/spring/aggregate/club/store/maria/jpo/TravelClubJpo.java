@@ -20,7 +20,6 @@ public class TravelClubJpo implements Serializable {
     //
     @Id
     private String id;
-    private String usid;
     private String name;
     private String intro;
     private long foundationTime;
@@ -33,7 +32,6 @@ public class TravelClubJpo implements Serializable {
     public TravelClub toDomain() {
         //
         TravelClub travelClub = new TravelClub(id);
-        travelClub.setUsid(usid);
         travelClub.setName(name);
         travelClub.setIntro(intro);
         travelClub.setFoundationTime(foundationTime);

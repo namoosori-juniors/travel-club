@@ -2,13 +2,14 @@ package io.namoosori.travelclub.spring.rest.aggregate.club;
 
 import io.namoosori.travelclub.spring.aggregate.club.service.ClubService;
 import io.namoosori.travelclub.spring.spec.aggregate.club.TravelClub;
+import io.namoosori.travelclub.spring.spec.facade.aggregate.club.facade.TravelClubFacade;
 import io.namoosori.travelclub.spring.spec.facade.aggregate.club.sdo.TravelClubCdo;
 import io.namoosori.travelclub.spring.spec.facade.shared.NameValueList;
-import io.namoosori.travelclub.spring.spec.facade.aggregate.club.facade.TravelClubFacade;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/club")
 public class TravelClubResource implements TravelClubFacade {
@@ -39,6 +40,13 @@ public class TravelClubResource implements TravelClubFacade {
     public List<TravelClub> findTravelClubsByName(@RequestParam String name) {
         //
         return clubService.findClubsByName(name);
+    }
+
+    @GetMapping("/all")
+    @Override
+    public List<TravelClub> findAllTravelClubs() {
+        //
+        return clubService.findAllClubs();
     }
 
     @PutMapping("/{clubId}")

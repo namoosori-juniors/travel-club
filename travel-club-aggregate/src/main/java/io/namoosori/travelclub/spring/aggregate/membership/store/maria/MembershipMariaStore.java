@@ -4,13 +4,11 @@ import io.namoosori.travelclub.spring.aggregate.membership.store.MembershipStore
 import io.namoosori.travelclub.spring.aggregate.membership.store.maria.jpo.MembershipJpo;
 import io.namoosori.travelclub.spring.aggregate.membership.store.maria.repository.MembershipRepository;
 import io.namoosori.travelclub.spring.spec.aggregate.club.Membership;
-import io.namoosori.travelclub.spring.spec.util.exception.NoSuchMembershipException;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Repository

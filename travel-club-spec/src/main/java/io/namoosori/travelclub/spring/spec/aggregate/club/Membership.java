@@ -26,7 +26,7 @@ public class Membership extends Entity {
 
 	public Membership(String clubId, String memberId) {
 		//
-		this.clubId = clubId; 
+		this.clubId = clubId;
 		this.memberId = memberId;
 		this.role = RoleInClub.Member;
 		this.joinDate = DateUtil.today();
@@ -66,7 +66,7 @@ public class Membership extends Entity {
 	}
 
 	public static void main(String[] args) {
-		// 
+		//
 		System.out.println(sample().toString());
 	}
 }

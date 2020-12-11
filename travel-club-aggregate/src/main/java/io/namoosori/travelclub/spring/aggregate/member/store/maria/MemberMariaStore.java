@@ -1,12 +1,15 @@
 package io.namoosori.travelclub.spring.aggregate.member.store.maria;
 
+import io.namoosori.travelclub.spring.aggregate.club.store.maria.jpo.TravelClubJpo;
 import io.namoosori.travelclub.spring.aggregate.member.store.MemberStore;
 import io.namoosori.travelclub.spring.aggregate.member.store.maria.jpo.MemberJpo;
 import io.namoosori.travelclub.spring.aggregate.member.store.maria.repository.MemberRepository;
 import io.namoosori.travelclub.spring.spec.aggregate.club.CommunityMember;
+import io.namoosori.travelclub.spring.spec.aggregate.club.TravelClub;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -52,6 +55,17 @@ public class MemberMariaStore implements MemberStore {
         return memberRepository.findByNameContaining(name, sort).stream()
                 .map(MemberJpo::toDomain)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CommunityMember> retrieveAll() {
+        //
+        List<CommunityMember> members = new ArrayList<>();
+        Iterable<MemberJpo> memberJpos = memberRepository.findAll();
+
+        memberJpos.forEach(memberJpo -> members.add(memberJpo.toDomain()));
+
+        return members;
     }
 
     @Override

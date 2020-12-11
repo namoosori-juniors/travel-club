@@ -65,6 +65,12 @@ public class MemberServiceLogic implements MemberService {
 	}
 
 	@Override
+	public List<CommunityMember> findAllMembers() {
+		//
+		return memberStore.retrieveAll();
+	}
+
+	@Override
 	public void modifyMember(String memberId, NameValueList nameValueList) {
 		//
 		CommunityMember targetMember = memberStore.retrieve(memberId);
@@ -85,6 +91,7 @@ public class MemberServiceLogic implements MemberService {
 		if (!memberStore.exists(memberId)) {
 			throw new NoSuchMemberException("No such member with id " + memberId);
 		}
+
 		memberStore.delete(memberId);
 	}
 }

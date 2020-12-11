@@ -7,6 +7,7 @@ import io.namoosori.travelclub.spring.spec.aggregate.club.TravelClub;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,20 +37,24 @@ public class TravelClubMariaStore implements ClubStore {
     }
 
     @Override
-    public TravelClub retrieveByUsid(String clubUsid) {
-        //
-        Optional<TravelClubJpo> travelClubJpo = travelClubRepository.findByUsid(clubUsid);
-        return travelClubJpo.map(TravelClubJpo::toDomain).orElse(null);
-    }
-
-    @Override
     public List<TravelClub> retrieveByName(String name) {
         //
-        Sort sort = Sort.by("foundationTime").ascending();
+        Sort sort = Sort.by("foundationTime").descending();
 
         return travelClubRepository.findByNameContaining(name, sort).stream()
                 .map(TravelClubJpo::toDomain)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TravelClub> retrieveAll() {
+        //
+        List<TravelClub> travelClubs = new ArrayList<>();
+        Iterable<TravelClubJpo> travelClubJpos = travelClubRepository.findAll();
+
+        travelClubJpos.forEach(travelClubJpo -> travelClubs.add(travelClubJpo.toDomain()));
+
+        return travelClubs;
     }
 
     @Override

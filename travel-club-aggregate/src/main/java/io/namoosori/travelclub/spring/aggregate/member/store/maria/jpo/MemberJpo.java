@@ -24,8 +24,8 @@ public class MemberJpo implements Serializable {
     private String id;
     private String email;
     private String name;
-    private String nickName;
     private String phoneNumber;
+    private String nickName;
     private String birthDay;
 
     private String addressesJson;
